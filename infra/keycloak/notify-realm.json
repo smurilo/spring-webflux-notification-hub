@@ -1,0 +1,35 @@
+{
+  "realm": "notify",
+  "enabled": true,
+  "clientScopes": [
+    {
+      "name": "notifications:send",
+      "protocol": "openid-connect",
+      "attributes": { "include.in.token.scope": "true" }
+    }
+  ],
+  "clients": [
+    {
+      "clientId": "hospital-a",
+      "secret": "hospital-a-secret",
+      "enabled": true,
+      "publicClient": false,
+      "serviceAccountsEnabled": true,
+      "standardFlowEnabled": false,
+      "defaultClientScopes": ["notifications:send"],
+      "protocolMappers": [
+        {
+          "name": "tenant",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-hardcoded-claim-mapper",
+          "config": {
+            "claim.name": "tenant",
+            "claim.value": "hospital-a",
+            "jsonType.label": "String",
+            "access.token.claim": "true"
+          }
+        }
+      ]
+    }
+  ]
+}
